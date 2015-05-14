@@ -5,5 +5,5 @@
   "description": "Makes forms open in new tabs if you're holding down a meta key while you click.",
   "author": "Mike Conley",
   "license": "MPL 2.0",
-  "version": "0.2"
+  "version": "0.2.1"
 }
