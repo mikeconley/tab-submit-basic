@@ -1,17 +1,17 @@
 const TabSubmit = {
-  init() {
+  init: function() {
     addEventListener("unload", this, false);
     addEventListener("mousedown", this, true);
     addEventListener("click", this, true);
   },
 
-  uninit() {
+  uninit: function() {
     removeEventListener("unload", this, false);
     removeEventListener("mousedown", this, true);
     removeEventListener("click", this, true);
   },
 
-  handleEvent(event) {
+  handleEvent: function(event) {
     switch(event.type) {
       case "unload":
         this.uninit();
@@ -25,14 +25,14 @@ const TabSubmit = {
     }
   },
 
-  onMousedown(event) {
+  onMousedown: function(event) {
     if (event.button == 1 && this.isFormButton(event.originalTarget)) {
       event.preventDefault();
       event.stopPropagation();
     }
   },
 
-  onClick(event) {
+  onClick: function(event) {
     let metas = event.ctrlKey || event.metaKey || event.shiftKey;
     if (event.button == 1 || (event.button == 0 && metas)) {
       let target = event.originalTarget;
@@ -63,7 +63,7 @@ const TabSubmit = {
     }
   },
 
-  isFormButton(node) {
+  isFormButton: function(node) {
     if (node instanceof HTMLButtonElement) {
       return true;
     }
