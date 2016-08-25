@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "TabSubmit Basic",
+  "applications": {
+    "gecko": {
+      "id": "tabsubmit-basic@mikeconley.ca",
+      "strict_min_version": "48.0"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "description": "Makes forms open in new tabs if you're holding down a meta key while you click.",
+  "version": "0.3.0"
+}
