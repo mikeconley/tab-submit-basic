@@ -14,5 +14,5 @@
     }
   ],
   "description": "Makes forms open in new tabs if you're holding down a meta key while you click.",
-  "version": "0.3.0"
+  "version": "0.4.0"
 }
