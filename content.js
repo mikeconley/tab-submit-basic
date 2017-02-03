@@ -1,21 +1,11 @@
 const TabSubmit = {
   init: function() {
-    addEventListener("unload", this, false);
     addEventListener("mousedown", this, true);
     addEventListener("click", this, true);
   },
 
-  uninit: function() {
-    removeEventListener("unload", this, false);
-    removeEventListener("mousedown", this, true);
-    removeEventListener("click", this, true);
-  },
-
   handleEvent: function(event) {
     switch(event.type) {
-      case "unload":
-        this.uninit();
-        break;
       case "mousedown":
         this.onMousedown(event);
         break;
