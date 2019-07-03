@@ -1,6 +1,7 @@
 const TabSubmit = {
   init: function() {
     addEventListener("mousedown", this, true);
+    addEventListener("auxclick", this, true);
     addEventListener("click", this, true);
   },
 
@@ -8,6 +9,9 @@ const TabSubmit = {
     switch(event.type) {
       case "mousedown":
         this.onMousedown(event);
+        break;
+      case "auxclick":
+        this.onAuxClick(event);
         break;
       case "click":
         this.onClick(event);
@@ -22,33 +26,41 @@ const TabSubmit = {
     }
   },
 
+  onAuxClick: function(event) {
+    this.checkForFormClick(event);
+  },
+
   onClick: function(event) {
     let metas = event.ctrlKey || event.metaKey || event.shiftKey;
     if (event.button == 1 || (event.button == 0 && metas)) {
-      let target = event.originalTarget;
-      if (this.isFormButton(target)) {
-        let form = target.form;
-        let oldTarget = form.getAttribute("target");
-        let oldFormTarget = form.getAttribute("formtarget");
+      this.checkForFormClick(event);
+    }
+  },
 
-        form.setAttribute("target", "_blank");
-        form.setAttribute("formtarget", "_blank");
+  checkForFormClick(event) {
+    let target = event.originalTarget;
+    if (this.isFormButton(target)) {
+      let form = target.form;
+      let oldTarget = form.getAttribute("target");
+      let oldFormTarget = form.getAttribute("formtarget");
 
-        event.preventDefault();
-        event.stopPropagation();
-        target.click();
+      form.setAttribute("target", "_blank");
+      form.setAttribute("formtarget", "_blank");
 
-        if (oldTarget) {
-          form.setAttribute("target", oldTarget);
-        } else {
-          form.removeAttribute("target");
-        }
+      event.preventDefault();
+      event.stopPropagation();
+      form.submit();
 
-        if (oldFormTarget) {
-          form.setAttribute("formtarget", oldFormTarget);
-        } else {
-          form.removeAttribute("formtarget");
-        }
+      if (oldTarget) {
+        form.setAttribute("target", oldTarget);
+      } else {
+        form.removeAttribute("target");
+      }
+
+      if (oldFormTarget) {
+        form.setAttribute("formtarget", oldFormTarget);
+      } else {
+        form.removeAttribute("formtarget");
       }
     }
   },
